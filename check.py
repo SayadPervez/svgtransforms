@@ -1,38 +1,19 @@
-def getSVGdimensions(svgContentsList):
-    widthStr=[]
-    heightStr=[]
-    for _ in svgContentsList:
-        if("width" in _ and widthStr!=None):
-            widthStr.append(_)
-        if("height" in _ and heightStr!=None):
-            heightStr.append(_)
-        if('id="svg5"' in _):
-            if(len(heightStr)!=0 and len(widthStr)!=0):
-                pass
-            else:
-                raise Exception("Not an inkscape SVG")
-    width = float((widthStr[0])[widthStr[0].index("width=\"")+7:widthStr[0].index("mm")])
-    height = float((heightStr[0])[heightStr[0].index("height=\"")+8:heightStr[0].index("mm")])
+import os
 
-    return(width,height)
-
-def svgRotate(filename,angle):
-    with open(filename,"r") as f:
-        originalSVGlist=f.readlines()
-    w,h = getSVGdimensions(originalSVGlist)
-    
-    ind=None
-    for i,x in enumerate(originalSVGlist):
-        if('id="svg5"' in x):
-            ind = i
-            break
-    
-    if(ind==None):
-        raise Exception("Not an Inkscape SVG")
+def svgRotate(path,angle,outputFileName = "new"):
+    if("./" in path):
+        pass
     else:
-        originalSVGlist[ind]+=f'transform = "translate({str(w)}, {str(h)}) rotate({str(angle)})"\n'
-    tranformedSVG=''.join(originalSVGlist)
-    with open("./new.svg",'w') as f:
-        f.write(tranformedSVG)
+        if("/" in path):
+            p = path[:path.rindex("/")+1]
+            path = path[path.rindex("/")+1:]
+        else:
+            pass
+    os.system(f'inkscape --batch-process --actions="select-all:all;transform-rotate:{str(angle)};FitCanvasToDrawing;export-filename:{outputFileName}.svg;export-do;" {path}')
+    #os.system(f'inkscape  --actions="FitCanvasToDrawing;export-filename:{outputFileName}.svg;export-do" {path}')
+        
 
-svgRotate("./x.svg",90)
+svgRotate("new.svg",25)
+#inkscape --verb=EditSelectAll --verb=AlignHorizontalCenter --verb=AlignVerticalCenter --verb=FileSave --verb=FileQuit foo.svg
+#
+#inkscape --verb=FitCanvasToDrawing --verb=FileSave --verb=FileClose --verb=FileQuit new.svg
