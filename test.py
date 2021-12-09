@@ -7,8 +7,8 @@ t = SVG("./x.svg")
 tw = t.width
 th = t.height
 
-myfigure = Figure(tw, th, 
+myfigure = Figure(tw*4, th*4, 
                   t,
-                  ).scale(pi_scale).move(50,50).rotate(45,75,75)
+                  ).scale(pi_scale).rotate(15,tw//2,th//2)
 
 myfigure.save('./new.svg')
