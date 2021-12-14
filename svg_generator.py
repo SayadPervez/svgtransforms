@@ -1,6 +1,7 @@
 import os
 import cairo
 from numpy import pi, sqrt
+import bs4 as bs
 
 def mm2pt(x):
     return(x*2.83465)
@@ -81,44 +82,35 @@ def Cone(height,radius,angle=0,name="Cone"):
         cr.fill()
     svgRotate(filename,angle+theta/2+90)
 
-def extract(file):
-    s=0; 
-    k=0; 
-    with open(file, "r") as file:
-        data = file.readlines()
-    for i,line in enumerate(data):
-        if(line.split()[0] =='<g'):
-            s=i
-            break
-    for j,line in enumerate(data):
-        if(line.split()[0]=='</g>'):
-            k=j
-    return data[s:k+1]
+def objectExtractor(path):
+    with open(path,"r") as f:
+        data = f.read()
+    file = bs.BeautifulSoup(data, "lxml")
+    g1 = file.find("g")
+    return(str(g1))
 
-def canvas_extract(file):
-    k=0; 
-    with open(file, "r") as file:
-        data = file.readlines()
-    for j,line in enumerate(data):
-        if(line.split()[0]=='</g>'):
-            k=j
-    return k
+def canvasExtracter(path):
+    with open(path,"r") as f:
+        data = f.read()
+    file = bs.BeautifulSoup(data, "lxml")
+    g1 = file.find("g")
+    gMain = str(g1)
+    half1=(data[:data.index("<g")+gMain.index(">")+1])
+    half2=(data[data.index("<g")+gMain.index(">")+1:])
+    return(half1,half2)
 
-def placeSVG(canvas,objectSVG,x,y):
-    x=mm2pt(x)
-    y=mm2pt(y)
-    if type(objectSVG)==type([]):
-        objectSVG=objectSVG
+def svgPlacer(canvas,svgObjects,x,y):
+    if(type(svgObjects)==type([])):
+        if(not(len(svgObjects)==len(x))==len(y)):
+            raise Exception("Unequal Array Length - SVGPLACER")
     else:
-        objectSVG=[objectSVG]
-    for i,shapes in enumerate(objectSVG):
-        s=extract(shapes)
-        with open(canvas,"r") as a:
-            can=a.readlines()
-        k=canvas_extract(canvas)
-        s.insert(0,'<g id="id'+"-"+ str(i)+'"' + ' transform="translate('+str(x)+','+str(y)+')"\n' )
-        s.insert(len(s)-1,'</g>\n')
-        can[k:k]=s
-        #Creating new svg file
-        c=open('Canvas.svg','a') 
-        c.writelines(can)
+        x,y,svgObjects=[x],[y],[svgObjects]
+    h1,h2=canvasExtracter(canvas)
+    st=""
+    for i,svg in enumerate(svgObjects):
+        st+=f'<g id="{str(i)}" transform="translate({mm2pt(x[i])},{mm2pt(y[i])})">'+objectExtractor(svg)+"</g>"
+    output = h1+st+h2
+    with open(canvas,"w") as f:
+        f.write(output)
+
+canvasExtracter("./canvas.svg")
