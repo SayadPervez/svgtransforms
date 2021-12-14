@@ -113,4 +113,4 @@ def svgPlacer(canvas,svgObjects,x,y):
     with open(canvas,"w") as f:
         f.write(output)
 
-canvasExtracter("./canvas.svg")
+svgPlacer("./canvas.svg","new.svg",10,10)
