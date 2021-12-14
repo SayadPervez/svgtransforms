@@ -101,7 +101,7 @@ def canvasExtracter(path):
 
 def svgPlacer(canvas,svgObjects,x,y):
     if(type(svgObjects)==type([])):
-        if(not(len(svgObjects)==len(x))==len(y)):
+        if(not(len(svgObjects)==len(x)==len(y))):
             raise Exception("Unequal Array Length - SVGPLACER")
     else:
         x,y,svgObjects=[x],[y],[svgObjects]
@@ -113,4 +113,9 @@ def svgPlacer(canvas,svgObjects,x,y):
     with open(canvas,"w") as f:
         f.write(output)
 
-svgPlacer("./canvas.svg","new.svg",10,10)
+createCanvas(100,100)
+Circle(25)
+s=["new.svg","circle.svg"]
+x=[10,50]
+y=[10,50]
+svgPlacer("./canvas.svg",s,x,y)

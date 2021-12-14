@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="283.465pt" height="283.465pt" viewBox="0 0 283.465 283.465" version="1.1">
-<g id="surface1">
+<g id="surface1"><g id="0" transform="translate(28.3465,28.3465)"><g id="layer1" inkscape:groupmode="layer" inkscape:label="Layer 1" transform="translate(-14.032808,-74.766776)">
+<g id="g96" transform="rotate(-2.1026532,160.64382,227.50812)">
+<rect height="61.473816" id="rect31" style="fill:#000000;stroke-width:0.264583" width="77.027428" x="47.77182" y="91.47007"></rect>
+<ellipse cx="123.50312" cy="95.913963" id="path55" rx="28.329803" ry="22.589775" style="fill:#000000;stroke-width:0.264583"></ellipse>
+<ellipse cx="97.217911" cy="52.357235" id="path57" rx="24.996883" ry="4.073566" style="fill:#000000;stroke-width:0.264583" transform="rotate(41.588837)"></ellipse>
+<ellipse cx="49.62344" cy="151.83292" id="path161" rx="6.6658354" ry="8.8877802" style="fill:#000000;stroke-width:0.264583"></ellipse>
+<ellipse cx="121.46634" cy="152.57355" id="path161-4" inkscape:transform-center-x="0.74064838" inkscape:transform-center-y="3.7032419" rx="6.6658354" ry="8.8877802" style="fill:#000000;stroke-width:0.264583"></ellipse>
+</g>
+</g></g><g id="1" transform="translate(141.7325,141.7325)"><g id="surface6" transform="translate(-2,-2)">
+<path d="m 143.73437,72.867188 c 0,39.136722 -31.73046,70.867182 -70.867182,70.867182 C 33.726563,143.73437 2,112.00391 2,72.867188 2,33.726563 33.726563,2 72.867188,2 112.00391,2 143.73437,33.726563 143.73437,72.867188" id="path2" style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"></path>
+</g></g>
 </g>
 </svg>
